@@ -1,0 +1,98 @@
+$def with (form, text)
+
+<!doctype html>
+
+<html>
+
+    <head>
+        <title>Python and AJAX tutorial for beginners with webpy and jQuery</title>
+        <link rel="stylesheet" type="text/css" href="/static/tutorial.css" />
+		<script type="text/javascript" src="/static/jquery.min.js"></script>
+
+        
+        <script type="text/javascript">
+				function speak(speech) {
+						var msg = new SpeechSynthesisUtterance(speech);// 
+				// 		msg.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == 'Whisper'; })[0];
+						speechSynthesis.speak(msg);
+					}
+								var final_transcript = '';
+								var recognizing = false;
+								var language = 'en-GB';  // change this to your language
+								
+                                jQuery(document).ready(function() {
+									if (!('webkitSpeechRecognition' in window)) {
+										alert("Your Browser does not support the Speech API");
+
+									}
+									 else {
+									// Create the recognition object and define four event handlers (onstart, onerror, onend, onresult)
+									var recognition = new webkitSpeechRecognition();
+									recognition.continuous = true;         // keep processing input until stopped
+									recognition.interimResults = true;     // show interim results
+									recognition.lang = language;           // specify the language
+
+									recognition.onstart = function() {
+										recognizing = true;
+										jQuery('#start_button').html('Click to Stop');
+									};
+									recognition.onresult = function(event) {
+									var interim_transcript = '';
+
+									// Assemble the transcript from the array of results
+									for (var i = event.resultIndex; i < event.results.length; ++i) {
+										if (event.results[i].isFinal) {
+											final_transcript += event.results[i][0].transcript;
+										} else {
+											interim_transcript += event.results[i][0].transcript;
+										}
+									}
+									
+									if(final_transcript.length > 0) {
+					
+										jQuery.ajax({
+													type: "POST",
+													data: {textfield : final_transcript},
+													success: function(data) {
+													jQuery('#foo').html(data).hide().fadeIn(1500);
+													speak(data);
+													},
+													});
+										return false;
+										
+										
+									}
+								}
+									
+								 jQuery("#start_button").click(function(e) {
+										e.preventDefault();
+										
+										if (recognizing) {
+											recognition.stop();
+											jQuery('#start_button').html('Click to Start Again');
+											recognizing = false;
+										} else {
+											final_transcript = '';
+
+											// Request access to the User's microphone and Start recognizing voice input
+											recognition.start();
+										}
+									});	
+								}
+							});
+        
+                        </script>
+    </head>
+    
+    <body>
+        <br>
+        <form class="form" method="post"> 
+        $:form.render()
+        <button id="start_button">Click to Start</button>   
+        </form>
+
+        <br><br>
+        <span id="foo">$text</span>        
+    </body>
+    
+</html>
