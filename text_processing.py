@@ -31,4 +31,6 @@ class Text_Processing:
  			if context.complete:
  				text = "HELLO " + context.name + " WHAT WOULD YOU LIKE TO COOK TODAY"
 		text = text.replace("CHEF", "")
+		if "CHOCOLATE MILK" in text:
+			text = "Chocolate Milk. Step 1: Pour milk into a glass. Step 2: Add cocoa powder to the glass and stir well. Chocolate milk is ready."
 		return text
