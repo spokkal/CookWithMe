@@ -1,7 +1,32 @@
 import web
+from session import MongoStore
+import pymongo
+import datetime
+
+
+from pymongo import Connection
+connection = Connection()
+
+db = connection['CookWithMe']
+conversation = db['conversation']
+db = c.webpy
+
+#Create a new session object, passing the db and collection name to the MongoStore object
+session = web.session.Session(app, MongoStore(db, 'sessions'))
+
+#If you want to do user authentication and stuff aswell, add these two lines
+users.session = session
+users.collection = db.users
+users.SALTY_GOODNESS = u'RANDOM_SALT'
+
 
 def make_text(string):
-    return string.upper();
+	dialog = {"date": datetime.datetime.utcnow(), 
+			  "speech": string}
+	conversation.insert(dialog);
+	connection.close();
+	print string;
+	return string.upper();
 
 urls = ('/', 'tutorial')
 render = web.template.render('templates/')
