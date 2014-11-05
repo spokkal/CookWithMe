@@ -12,13 +12,13 @@ $def with (form, text)
         
         <script type="text/javascript">
 				function speak(speech) {
-						var msg = new SpeechSynthesisUtterance(speech);// 
-				// 		msg.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == 'Whisper'; })[0];
+						var msg = new SpeechSynthesisUtterance(speech);
+				 		//msg.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == 'Whisper'; })[0];
 						speechSynthesis.speak(msg);
 					}
 								var final_transcript = '';
 								var recognizing = false;
-								var language = 'en-GB';  // change this to your language
+								var language = 'en-US';  // change this to your language
 								
                                 jQuery(document).ready(function() {
 									if (!('webkitSpeechRecognition' in window)) {
@@ -49,7 +49,6 @@ $def with (form, text)
 									}
 									
 									if(final_transcript.length > 0) {
-					
 										jQuery.ajax({
 													type: "POST",
 													data: {textfield : final_transcript},
@@ -58,8 +57,8 @@ $def with (form, text)
 													speak(data);
 													},
 													});
-										return false;
-										
+										final_transcript = '';
+										interim_transcript = '';
 										
 									}
 								}
@@ -92,7 +91,7 @@ $def with (form, text)
         </form>
 
         <br><br>
-        <span id="foo">$text</span>        
+        <span id="foo">$text</span>     
     </body>
     
 </html>
