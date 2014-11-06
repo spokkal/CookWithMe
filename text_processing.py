@@ -18,6 +18,10 @@ class Initial_State:
 			self.name = split_text[split_text.index('AM') + 1] 
 			self.complete = True
 			return
+		if "I'M" in text:
+			self.name = split_text[split_text.index("I'M") + 1]
+			self.complete = True
+			return
 			
 			
 			
