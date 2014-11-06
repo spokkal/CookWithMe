@@ -1,6 +1,18 @@
 import web
 from text_processing import*
+<<<<<<< HEAD
 
+=======
+import pymongo
+import datetime
+
+from pymongo import Connection
+connection = Connection()
+
+db = connection['CookWithMe']
+conversation = db['conversation']
+
+>>>>>>> master
 web.config.debug = False
 
 processing = Text_Processing()
@@ -19,8 +31,20 @@ my_form = web.form.Form(
 	
 def make_text(string, context):
 	toReturn = ""
+<<<<<<< HEAD
 	print(string)
 	if "CHEF" in string.upper(): toReturn = processing.process(string.upper(), context)
+=======
+	
+	print(string)
+	if "CHEF" in string.upper(): toReturn = processing.process(string.upper(), context)
+	
+	dialog = {"date": datetime.datetime.utcnow(), 
+			  "user": string, "Chef": toReturn}
+	conversation.insert(dialog);
+	connection.close();
+	
+>>>>>>> master
 	return toReturn
 	
 class tutorial:
