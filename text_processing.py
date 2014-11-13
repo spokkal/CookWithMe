@@ -18,13 +18,10 @@ class Initial_State:
 			self.name = split_text[split_text.index('AM') + 1] 
 			self.complete = True
 			return
-<<<<<<< HEAD
-=======
 		if "I'M" in text:
 			self.name = split_text[split_text.index("I'M") + 1]
 			self.complete = True
 			return
->>>>>>> master
 			
 			
 			
@@ -38,9 +35,8 @@ class Text_Processing:
  			if context.complete:
  				text = "HELLO " + context.name + " WHAT WOULD YOU LIKE TO COOK TODAY"
 		text = text.replace("CHEF", "")
-<<<<<<< HEAD
-=======
+
 		if "CHOCOLATE MILK" in text:
 			text = "Chocolate Milk. Step 1: Pour milk into a glass. Step 2: Add cocoa powder to the glass and stir well. Chocolate milk is ready."
->>>>>>> master
+
 		return text
