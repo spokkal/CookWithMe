@@ -1,3 +1,5 @@
+from state_machine import *
+
 class Initial_State:
 
 	def __init__(self):

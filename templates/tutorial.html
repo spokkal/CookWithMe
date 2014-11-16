@@ -39,6 +39,10 @@ $def with (form, text)
 										recognizing = true;
 										jQuery('#start_button').html('Click to Stop');
 									};
+									
+									recognition.onend = function() {
+									}
+									
 									recognition.onresult = function(event) {
 									var interim_transcript = '';
 
@@ -56,14 +60,14 @@ $def with (form, text)
 													type: "POST",
 													data: {textfield : final_transcript},
 													success: function(data) {
-													jQuery('#foo').html(data).hide().fadeIn(1500);
 													if(data != '')
 														speak(data);
+													jQuery('#foo').html(data).hide().fadeIn(1500);
 													},
 													});													
 										final_transcript = '';
 										interim_transcript = '';
-										return false;
+										return;
 
 										
 									}

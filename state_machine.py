@@ -5,7 +5,8 @@ class State:
 		self.verified = False
 		
 	def update(self, text):
-		#process text here.
+		if("BACK" in text)
+			return previousStep(text)
 		
 	def getIngredients(self):
 		ingredients = ''
