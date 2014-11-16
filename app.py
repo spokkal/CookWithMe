@@ -22,7 +22,7 @@ session = web.session.Session(app, web.session.DiskStore('sessions'), initialize
         
 
 my_form = web.form.Form(
-                web.form.Textbox('', class_='textfield', id='textfield'),
+                web.form.Hidden('', class_='textfield', id='textfield'),
                 )
 	
 def make_text(string, context):
@@ -43,7 +43,7 @@ class tutorial:
     def GET(self):
     	session.context = Initial_State()
         form = my_form()
-    	return render.tutorial(form, "Your text goes here.")
+    	return render.tutorial(form, "Speech Transcript")
         
     def POST(self):
         form = my_form()
