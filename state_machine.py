@@ -1,31 +1,19 @@
-class State:
+from ingredient_state import*
+from intro_state import*
+
+class StateMachine:
 	def __init__(self):
-		self.dictionary = None
-		self.current = 0
-		self.verified = False
+		self.state = IntroState()
 		
+	#This is going to filter the text input and pass it to the current state.
+	#The current state will determine the correct transition to make
+	#and will return the correct state.
 	def update(self, text):
-		if "BACK" in text:
-			return previousStep(text)
-		
-	def getIngredients(self):
-		ingredients = ''
-		for i in range (0,self.dictionary["ingredients"].length):
-			ingredients += self.dictionary["ingredients"][i]["name"]
-		return ingredients
-		
-	def nStep(self, index):
-		num = int(index)
-		return self.dictionary["instructions"][num]["transcript"]
-		
-	def previousStep(self):
-		return self.dictionary["instructions"][current - 1]["transcript"]
-		
-	def nextStep(self):
-		if self.verified:
-			self.verified = False
-			current += 1
-			return self.dictionary["instructions"][current]["transcript"]
-		else:
-			self.verified = True
-			return "Have you completed the step?"	 
+		text = self.filter(text)
+		self.state = self.state.update(text) #We update the state. This will transition if needed.
+		return self.state.getText() #Now we can return the resulting text for the current state.
+ 
+ 	def filter(self, text):
+ 		#This is where we can perform filtering and word replacement
+ 		#on the input text.
+ 		return text

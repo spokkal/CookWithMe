@@ -1,5 +1,6 @@
 import web
 from text_processing import*
+from state_machine import StateMachine
 
 import pymongo
 import datetime
@@ -43,7 +44,7 @@ def make_text(string, context):
 class tutorial:
 		
     def GET(self):
-    	session.context = Initial_State()
+    	session.context = StateMachine()
         form = my_form()
     	return render.tutorial(form, "Your text goes here.")
         
