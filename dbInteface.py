@@ -1,8 +1,4 @@
-from pymongo import MongoClient
-
-client = MongoClient()					#Creata MongoClient objects
-db = client.CookWithMe					#Create instance of the CookWithMe  database
-col = db.recipes						#Use the collection recipes 
+from pymongo import*
 
 class RecipeInfo(object):
 	""" This class has the methods to access the database CookWithMe(MongoDB) 
@@ -11,21 +7,24 @@ class RecipeInfo(object):
 	"""
 	
 	def __init__(self, recipeName):
+		self.client = MongoClient()					#Creata MongoClient objects
+		self.db = self.client.CookWithMe					#Create instance of the CookWithMe  database
+		self.col = self.db.recipes						#Use the collection recipes 
 		self.recipeName = 	recipeName
-		self.recipe		=	col.find({"name":recipeName})	#if the recipe is None then there is no such and inform the user.
+		self.recipe		=	self.col.find_one({"name":recipeName})	#if the recipe is None then there is no such and inform the user.
 		
 		
 	def get(self):
 		return self.recipe;
 		
 	def getIngredients(self):
-		return self.recipe["ingredients"]
+		return self.recipe['ingredients']
 		
 	def getInstructions(self):
-		return self.recipe["instructions"]
+		return self.recipe['instructions']
 	
-	def getInstructions(self, number):
+	def getInstructionsAt(self, number):
 		if(number < 1):
-			return self.recipe["instructions"][number-1]
+			return self.recipe['instructions'][number-1]
 		return None
 		

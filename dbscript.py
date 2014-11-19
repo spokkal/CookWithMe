@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-db = cl.CookWithMe
+
 cl = MongoClient()
 db = cl.CookWithMe
 recipes = db.recipes
@@ -50,7 +50,7 @@ recipe = {"name" : "Roasted Chicken",
 {  "transcript": "Truss the chicken using butcher's twine. Tie the legs together and tie the wings close to the body"},
 {  "transcript": "Season the outside of your chicken with lots of salt and some pepper"},
 {  "transcript": "Place the chicken breast side up on a rack over a roasting pan"},
-{  "transcript": "Put it in the 450 degrees Fahrenheit oven for 50–60 minutes. Do not flip, bast or open the oven unless necessary"}, 
+{  "transcript": "Put it in the 450 degrees Fahrenheit oven for 50-60 minutes. Do not flip, bast or open the oven unless necessary"},
 {  "transcript": "Your chicken is done when its internal temperature is 165 degrees. Serve it after 15 minutes."} ],
 
 "cooktime" : 70
