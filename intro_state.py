@@ -1,4 +1,5 @@
 import ingredient_state
+import dbInteface
 from pymongo import*
 
 #Intro state will provide for the initial interaction with the user.
@@ -7,16 +8,15 @@ from pymongo import*
 class IntroState:
 
 	def __init__(self):
-		self.text = "HELLO, I AM CHEF. WHAT WOULD YOU LIKE TO COOK TODAY?"
-		self.names_list = {"Grilled Cheese", "Roasted Chicken", "Roasted Vegetables", "Brownies", "Loaf Cake"} 
+		self.text = "HELLO <n>, I AM CHEF. WHAT WOULD YOU LIKE TO COOK TODAY?"
+		filter = dbInteface.Filter("recipe_names")
+		self.names_list = filter.getFilter()
 				
 	def update(self, text):
-	
 		client = MongoClient()
 		for name in self.names_list:
 			if name.upper() in text:
 				return ingredient_state.IngredientState(name)
-		
 		return self
 	
 	def getText(self):

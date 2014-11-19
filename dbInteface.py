@@ -24,7 +24,19 @@ class RecipeInfo(object):
 		return self.recipe['instructions']
 	
 	def getInstructionsAt(self, number):
-		if(number < 1):
-			return self.recipe['instructions'][number-1]
+		if(number >= 1):
+			return self.recipe['instructions'][number-1]['transcript']
 		return None
+	
+class Filter(object):
+
+	def __init__(self, filterType):
+		self.client = MongoClient()					#Creata MongoClient objects
+		self.db = self.client.CookWithMe					#Create instance of the CookWithMe  database
+		self.col = self.db.filters						#Use the collection recipes 
+		self.filterType = 	filterType
+		self.filter		=	self.col.find_one({"name":filterType})	#if the recipe is None then there is no such and inform the user.
+	
+	def getFilter(self):
+		return self.filter['filter']
 		
