@@ -3,30 +3,46 @@ import intro_state
 import instruction_state
 
 class IngredientState:
-
 	def __init__(self, name):
 		self.recipe_name = name
 		recipe = dbInteface.RecipeInfo(name)
-		ingredients = recipe.getIngredients()
-		self.text = "OK <n>, YOU WILL NEED; "
-		count = 0
-		for ingredient in ingredients:
-			count += 1
-			if (len(ingredients) - 1) == count:
-				self.text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + ", and "
-			elif len(ingredients) == count:
-				self.text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + "."
-			else:
-				self.text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + ", "
-		self.text += " WOULD YOU LIKE TO CONTINUE?"
+		r = recipe.get()
+		self.ingredients = recipe.getIngredients()
+		self.text = self.getIngredients()
+		
 		
 	def update(self, text):
 		if "RETURN" in text:
-			return intro_state.IntroState()
+			return intro_state.IntroState()			
 		elif "YES" in text:
 			return instruction_state.InstructionState(self.recipe_name, 1)
-		else:
-			return self
+		elif "REPEAT" in text or "AGAIN" in text:
+			self.text = self.getIngredients()
+		elif self.getOneIngredient(text) != None:
+			self.text = self.getOneIngredient(text)
+		return self
+	
+	def getIngredients(self):
+		text = "OK <n>, YOU WILL NEED; "
+		count = 0
+		for ingredient in self.ingredients:
+			count += 1
+			if (len(self.ingredients) - 1) == count:
+				text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + ", and "
+			elif len(self.ingredients) == count:
+				text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + "."
+			else:
+				text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + ", "
+		text += " WOULD YOU LIKE TO CONTINUE?"
+		return text
+		
+	def getOneIngredient(self, ingredient):
+		text = None
+		for i in self.ingredients:
+			if i["name"].upper() in ingredient:
+				text = "YOU WILL NEED; "
+				text += str(i["qty"]) + " " + i["measure"] + " " + i["name"]
+		return text
 	
 	def getText(self):
 		return self.text

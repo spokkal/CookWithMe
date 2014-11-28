@@ -18,7 +18,15 @@ filters.insert(filter)
 
 filter = {"name" : "confirmations",
 
-"filter" : ["Done", "Complete", "Finished", "Continue"]
+"filter" : ["Done", "Complete", "Finished", "Continue", "Ok", "Next"]
+}	
+
+filters.insert(filter)
+
+###############previous filter#################
+filter = {"name" : "previous",
+
+"filter" : ["previous", "earlier", "last"]
 }	
 
 filters.insert(filter)

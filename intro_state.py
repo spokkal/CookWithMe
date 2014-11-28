@@ -16,6 +16,7 @@ class IntroState:
 		client = MongoClient()
 		for name in self.names_list:
 			if name.upper() in text:
+				print name
 				return ingredient_state.IngredientState(name)
 		return self
 	
