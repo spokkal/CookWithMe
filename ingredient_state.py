@@ -9,13 +9,14 @@ class IngredientState:
 		r = recipe.get()
 		self.ingredients = recipe.getIngredients()
 		self.text = self.getIngredients()
+		self.text += " WOULD YOU LIKE TO CONTINUE?"
 		
 		
 	def update(self, text):
 		if "RETURN" in text:
 			return intro_state.IntroState()			
 		elif "YES" in text:
-			return instruction_state.InstructionState(self.recipe_name, 1)
+			return instruction_state.InstructionState(self.recipe_name, 1, self)
 		elif "REPEAT" in text or "AGAIN" in text:
 			self.text = self.getIngredients()
 		elif self.getOneIngredient(text) != None:
@@ -33,7 +34,6 @@ class IngredientState:
 				text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + "."
 			else:
 				text += str(ingredient["qty"]) + " " + ingredient["measure"] + " " + ingredient["name"] + ", "
-		text += " WOULD YOU LIKE TO CONTINUE?"
 		return text
 		
 	def getOneIngredient(self, ingredient):

@@ -15,6 +15,7 @@ class StateMachine:
 			
 		toReturn = self.filter(text)
 		self.state = self.state.update(toReturn) #We update the state. This will transition if needed.
+		print self.state
 		toReturn = self.state.getText() #Now we can return the resulting text for the current state.
  		toReturn = self.postProcess(toReturn)
  		return toReturn

@@ -1,10 +1,15 @@
 import intro_state
 import ingredient_state
 import dbInteface
+import re
 
 class InstructionState:
 
-	def __init__(self, name, position):
+	def __init__(self, name, position, ing_state):
+		
+		if ing_state:
+			self.ing_state = ing_state
+		
 		self.recipe_name = name
 		recipe = dbInteface.RecipeInfo(name)
 		instruction = recipe.getInstructionsAt(position)
@@ -15,20 +20,19 @@ class InstructionState:
 		confirmations = dbInteface.Filter("confirmations").getFilter()
 		for affirm in confirmations:
 			if affirm.upper() in text:
-				return InstructionState(self.recipe_name, self.step + 1)
+				return InstructionState(self.recipe_name, self.step + 1, None)
 
 		
 		previous = dbInteface.Filter("previous").getFilter()
 		for affirm in previous:
 			if affirm.upper() in text:
-				return InstructionState(self.recipe_name, self.step - 1 )
-
+				return InstructionState(self.recipe_name, self.step - 1, None)
 		
-		'''confirmations = dbInteface.Filter("confirmations").getFilter()
-		for affirm in confirmations:
-			if affirm.upper() in text:
-				return InstructionState(self.recipe_name, self.step + 1)
-		'''
+		matchobj = re.search(r'INGREDIENTS',text)
+		if matchobj:
+			self.ing_state = self.ing_state.update(text)
+			self.text = self.ing_state.getText()
+
 		return self
 		
 	def getText(self):
