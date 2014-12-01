@@ -26,7 +26,16 @@ filters.insert(filter)
 ###############previous filter#################
 filter = {"name" : "previous",
 
-"filter" : ["previous", "earlier", "last"]
+"filter" : ["previous", "earlier", "last", "back"]
 }	
 
 filters.insert(filter)
+
+###############Step filter#################
+filter = {"name" : "step",
+
+"filter" : ["step", "instruction"]
+}	
+
+filters.insert(filter)
+

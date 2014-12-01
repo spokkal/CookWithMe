@@ -16,11 +16,11 @@ class IngredientState:
 		if "RETURN" in text:
 			return intro_state.IntroState()			
 		elif "YES" in text:
-			return instruction_state.InstructionState(self.recipe_name, 1, self)
-		elif "REPEAT" in text or "AGAIN" in text:
-			self.text = self.getIngredients()
+			return instruction_state.InstructionState(self.recipe_name, 1, self, None)
 		elif self.getOneIngredient(text) != None:
 			self.text = self.getOneIngredient(text)
+		elif "REPEAT" in text or "AGAIN" in text:
+			self.text = self.getIngredients()
 		return self
 	
 	def getIngredients(self):
