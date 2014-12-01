@@ -9,7 +9,7 @@ class IngredientState:
 		r = recipe.get()
 		self.ingredients = recipe.getIngredients()
 		self.text = self.getIngredients()
-		self.text += " WOULD YOU LIKE TO CONTINUE?"
+		self.text += "Would you like to continue?"
 		
 		
 	def update(self, text):
