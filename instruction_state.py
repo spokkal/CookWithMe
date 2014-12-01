@@ -25,7 +25,7 @@ class InstructionState:
 			self.done = True
 		else :
 			self.step = position  #boundary check missing
-			self.text = "Ok, step " + str(position) + " " + instruction + ". " + "Let me know when you are ready to continue <n>."
+			self.text = "Step " + str(position) + " " + instruction + ". " + "Let me know when you are ready to continue <n>."
 		
 	def update(self, text):
 		if (self.done == True):

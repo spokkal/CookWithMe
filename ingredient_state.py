@@ -24,7 +24,7 @@ class IngredientState:
 		return self
 	
 	def getIngredients(self):
-		text = "OK <n>, YOU WILL NEED; "
+		text = "OK <n>, YOU WILL NEED: "
 		count = 0
 		for ingredient in self.ingredients:
 			count += 1
@@ -40,7 +40,7 @@ class IngredientState:
 		text = None
 		for i in self.ingredients:
 			if i["name"].upper() in ingredient:
-				text = "YOU WILL NEED; "
+				text = "YOU WILL NEED: "
 				text += str(i["qty"]) + " " + i["measure"] + " " + i["name"]
 		return text
 	

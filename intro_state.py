@@ -9,7 +9,7 @@ class IntroState:
 
 	def __init__(self, text):
 		if(text == None):
-			self.text = "HELLO <n>, I AM CHEF. WHAT WOULD YOU LIKE TO COOK TODAY?"
+			self.text = "HELLO <n>. WHAT WOULD YOU LIKE TO COOK TODAY?"
 		else:
 			self.text = "WHAT WOULD YOU LIKE TO COOK NEXT?"
 		filter = dbInteface.Filter("recipe_names")
