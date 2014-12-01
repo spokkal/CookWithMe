@@ -11,7 +11,6 @@ connection = Connection()
 db = connection['CookWithMe']
 conversation = db['conversation']
 
-
 web.config.debug = False
 
 processing = Text_Processing()
@@ -27,12 +26,19 @@ session = web.session.Session(app, web.session.DiskStore('sessions'), initialize
 my_form = web.form.Form(
                 web.form.Textbox('', class_='textfield', id='textfield'),
                 )
-	
+flag = False	
 def make_text(string, context):
+	global flag
 	toReturn = ""
 	
 	print(string)
-	if "CHEF" in string.upper(): toReturn = processing.process(string.upper(), context)
+	if "CHEF" in string.upper(): 
+		toReturn = processing.process(string.upper(), context)
+		flag = True
+	elif flag:
+		toReturn = processing.process(string.upper(), context)
+	else:
+		toReturn = "I am sorry, I have a limited dictionary. Please say the right words."
 	
 	dialog = {"date": datetime.datetime.utcnow(), 
 			  "user": string, "Chef": toReturn}

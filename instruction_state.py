@@ -32,7 +32,7 @@ class InstructionState:
 			if savepos == None:
 				self.step = position  #boundary check missing
 			self.text = "Ok, step " + str(position) + " " + instruction + ". " + "Let me know when you are ready to continue <n>."
-		
+
 	def update(self, text):
 		
 		numberdict = {"ONE":1, "1":1,"TWO":2,"2":2,"THREE":3,"3":3,
