@@ -1,6 +1,6 @@
 from state_machine import StateMachine
 
-context = StateMachine()
+context = StateMachine(None)
 
 while 1==1:
 	text = raw_input()

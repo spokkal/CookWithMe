@@ -44,7 +44,7 @@ def make_text(string, context):
 class tutorial:
 		
     def GET(self):
-    	session.context = StateMachine()
+    	session.context = StateMachine(None)
         form = my_form()
     	return render.tutorial(form, "Your text goes here.")
         

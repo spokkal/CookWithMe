@@ -2,8 +2,8 @@ from ingredient_state import*
 from intro_state import*
 
 class StateMachine:
-	def __init__(self):
-		self.state = IntroState()
+	def __init__(self, text):
+		self.state = IntroState(text)
 		self.name = ''
 		
 	#This is going to filter the text input and pass it to the current state.

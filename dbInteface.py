@@ -24,8 +24,12 @@ class RecipeInfo(object):
 		return self.recipe['instructions']
 	
 	def getInstructionsAt(self, number):
-		if(number >= 1):
+		if (number > len(self.recipe['instructions'])):
+			return "Error2"
+		elif(number >= 1):
 			return self.recipe['instructions'][number-1]['transcript']
+		elif (number < 1):
+			return "Error1"
 		return None
 	
 class Filter(object):
