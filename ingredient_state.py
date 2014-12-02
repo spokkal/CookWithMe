@@ -13,18 +13,24 @@ class IngredientState:
 		
 		
 	def update(self, text):
+		filter = dbInteface.Filter("confirmations")
+		self.conf_list = filter.getFilter()
+		
 		if "RETURN" in text:
 			return intro_state.IntroState()			
-		elif "YES" in text:
-			return instruction_state.InstructionState(self.recipe_name, 1, self, None, None)
-		elif self.getOneIngredient(text) != None:
+		for conf in self.conf_list:
+			if conf.upper() in text:
+				return instruction_state.InstructionState(self.recipe_name, 1, self, None, None)
+		if self.getOneIngredient(text) != None:
 			self.text = self.getOneIngredient(text)
 		elif "REPEAT" in text or "AGAIN" in text:
 			self.text = self.getIngredients()
+		else:
+			self.text = "Please say Repeat to hear the ingredients, Return to go back or Continue to start cooking."
 		return self
 	
 	def getIngredients(self):
-		text = "OK <n>, you will need: "
+		text = "OK <n>, for "+self.recipe_name+" you will need: "
 		count = 0
 		for ingredient in self.ingredients:
 			count += 1

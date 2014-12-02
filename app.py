@@ -38,7 +38,7 @@ def make_text(string, context):
 	elif flag:
 		toReturn = processing.process(string.upper(), context)
 	else:
-		toReturn = "I am sorry, I have a limited dictionary. Please say the right words."
+		toReturn = "I am sorry, I didn't understand you. Please say Chef to start cooking."
 	
 	dialog = {"date": datetime.datetime.utcnow(), 
 			  "user": string, "Chef": toReturn}
@@ -49,16 +49,18 @@ def make_text(string, context):
 	
 class tutorial:
 		
-    def GET(self):
-    	session.context = StateMachine(None)
-        form = my_form()
-    	return render.tutorial(form, "Your text goes here.")
+	def GET(self):
+		global flag
+		flag = False
+		session.context = StateMachine(None)
+		form = my_form()
+		return render.tutorial(form, "Your text goes here.")
         
-    def POST(self):
-        form = my_form()
-        form.validates()
-        s = form.value['textfield']
-        return make_text(s, session.context)
+	def POST(self):
+		form = my_form()
+		form.validates()
+		s = form.value['textfield']
+		return make_text(s, session.context)
 
 if __name__ == '__main__':
     app.run()

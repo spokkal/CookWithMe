@@ -18,7 +18,7 @@ filters.insert(filter)
 
 filter = {"name" : "confirmations",
 
-"filter" : ["Done", "Complete", "Finished", "Continue", "Ok", "Next"]
+"filter" : ["Done", "Complete", "Finished", "Continue", "Ok", "Next", "Yes"]
 }	
 
 filters.insert(filter)

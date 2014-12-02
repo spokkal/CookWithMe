@@ -13,17 +13,15 @@ recipe = {"name" : "Grilled Cheese",
 
 "ingredients" : [ { "name": "sandwich bread", "qty" : 2, "measure": "slices"},
 { "name": "american cheese", "qty" : 2, "measure": "slices" },
-{ "name": "butter", "qty" : 2, "measure" : "tablespoons"},
+{ "name": "butter", "qty" : 1, "measure" : "tablespoons"},
 { "name": "salt", "qty": "a pinch of", "measure" : "" } ],
 
-"instructions": [ { "transcript": "Melt a third of the butter in a non-stick or cast iron pan over relatively low heat"},
+"instructions": [ { "transcript": "Melt a half of the butter in a non-stick or cast iron pan over relatively low heat"},
 {  "transcript": "Toast the slices of bread on one side until they are an even pale golden brown and remove from the pan"},
 {  "transcript": "Add the cheese slices to the bread on the toasted side and close the sandwich, toasted-side-in"},
-{  "transcript": "Add another third of the butter and melt it over low to medium-low heat" },
+{  "transcript": "Add the other half of the butter to the pan and melt it over low to medium-low heat" },
 {  "transcript": "Add the sandwich to the pan and swirl it around to collect the butter, then cook low and slow till it gets even color for about five minutes", "time": "5", "measure" : "minutes"},
-{  "transcript": "Remove the sandwich once it is golden brown, and melt the remaining butter over relatively low heat"},
-{  "transcript": "Return the sandwich to the pan, toasted-side-up, and season with a sprinkle of salt"},
-{  "transcript": "Continue cooking till the sandwich is deep golden brown in color"} ],
+{  "transcript": "Remove the sandwich once it is golden brown, and season with a sprinkle of salt"}],
 
 "cooktime" : 15
 }	
