@@ -39,9 +39,9 @@ class StateMachine:
 			return split_text[split_text.index('IS') + 1] 
 		elif "THEY CALL ME" in text:
 			return split_text[split_text.index('ME') + 1] 
-		elif "I AM" in text:
+		elif "I AM" in text and "DONE" not in text and "READY" not in text:
 			return split_text[split_text.index('AM') + 1] 
-		elif "I'M" in text:
+		elif "I'M" in text and "DONE" not in text and "READY" not in text:
 			return split_text[split_text.index("I'M") + 1]
 		else:
 			return self.name 
