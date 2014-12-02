@@ -39,3 +39,15 @@ filter = {"name" : "step",
 
 filters.insert(filter)
 
+###############Explain filter#################
+filter = {"name" : "explain",
+
+"filter" : {"toast":"Toasting means to cook or brown food, generally bread, by exposure to a grill, fire, or other source of radiant heat.",
+			"whisk":"Whisking means to beat or stir a substance, especially cream or eggs with a light, rapid movement.",
+			"swirl":"Swirling means to move in a twisting or spiraling pattern",
+			"truss":"Trussing means to tie up the wings and legs of a chicken or other bird before cooking",
+			}
+			
+}	
+
+filters.insert(filter)

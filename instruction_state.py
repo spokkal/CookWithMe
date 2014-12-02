@@ -5,7 +5,7 @@ import re
 
 class InstructionState:
 
-	def __init__(self, name, position, ing_state, savepos):
+	def __init__(self, name, position, ing_state, savepos, explain):
 		
 		if ing_state:
 			self.ing_state = ing_state
@@ -19,7 +19,9 @@ class InstructionState:
 		instruction = recipe.getInstructionsAt(position)
 		self.done = False
 		
-		if (instruction == "Error1"):
+		if (explain):
+			self.text = explain
+		elif (instruction == "Error1"):
 			self.text = "Sorry, there is no previous step."
 			if savepos == None:
 				self.step = position + 1
@@ -46,13 +48,13 @@ class InstructionState:
 		confirmations = dbInteface.Filter("confirmations").getFilter()
 		for affirm in confirmations:
 			if affirm.upper() in text:
-				return InstructionState(self.recipe_name, self.step + 1, self.ing_state, None)
+				return InstructionState(self.recipe_name, self.step + 1, self.ing_state, None, None)
 
 		
 		previous = dbInteface.Filter("previous").getFilter()
 		for affirm in previous:
 			if affirm.upper() in text:
-				return InstructionState(self.recipe_name, self.step - 1, self.ing_state, None)
+				return InstructionState(self.recipe_name, self.step - 1, self.ing_state, None, None)
 		
 		
 		step = dbInteface.Filter("step").getFilter()
@@ -64,7 +66,7 @@ class InstructionState:
 				stepNo = numberdict[sno]
 				print(stepNo)
 				if type(stepNo) is int:
-					return InstructionState(self.recipe_name, stepNo, self.ing_state, self.step)
+					return InstructionState(self.recipe_name, stepNo, self.ing_state, self.step, None)
 						
 		
 		
@@ -73,6 +75,19 @@ class InstructionState:
 			self.ing_state = self.ing_state.update(text)
 			self.text = self.ing_state.getText()
 
+		m1 = re.search(r'EXPLAIN',text)	
+		m2 = re.search(r'MEAN',text)
+		m3 = re.search(r'ELABORATE',text)
+		
+			
+		if m1 or  m2 or m3:
+			exp = dbInteface.Filter("explain").getFilter()
+			for affirm in exp:
+				if affirm.upper() in text:
+					return InstructionState(self.recipe_name, self.step, self.ing_state, self.step, exp[affirm])
+
+		
+			
 		return self
 
 		
