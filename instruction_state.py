@@ -26,14 +26,14 @@ class InstructionState:
 			if savepos == None:
 				self.step = position + 1
 		elif (instruction == "Error2"):
-			self.text = "The recipe is complete. Thank you"
+			self.text = "The recipe is complete. Let me know when you are ready to continue <n>."
 			if savepos == None:
 				self.step = position - 1
 			self.done = True
 		else :
 			if savepos == None:
 				self.step = position  #boundary check missing
-			self.text = "Ok, step " + str(position) + " " + instruction + ". " + "Let me know when you are ready to continue <n>."
+			self.text = "Step " + str(position) + " " + instruction + ". " + "Let me know when you are ready to continue <n>."
 
 	def update(self, text):
 		
